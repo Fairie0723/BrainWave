@@ -1,0 +1,40 @@
+/* format the list to make it discs */
+ul {
+    list-style-type: disc;
+  }
+  
+  /* set the horizontal nav bar formatting */
+  #ulhbar {
+    list-style-type: none;
+    margin: auto;
+    padding: 0;
+    border: solid lavender;
+    border-style: groove;
+    overflow: hidden;
+    text-align: center;
+    width: fit-content;
+    background-color: lightsteelblue;
+  }
+
+/* elements of nav bar from left to right */
+#lihbar {
+    float: left;
+}
+
+/* display the contents of the nav bar */
+li a {
+    display: block;
+ color: black;
+ text-align: center;
+ padding: 10px;
+ text-decoration: none;
+}
+
+/* hover with mouse values */
+li a:hover {
+ background-color: lavender;
+}
+
+hr {
+    border: 2px solid black;
+  }
