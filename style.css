@@ -1,40 +1,112 @@
-/* format the list to make it discs */
-ul {
-    list-style-type: disc;
-  }
-  
-  /* set the horizontal nav bar formatting */
-  #ulhbar {
+/* General styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: lightblue;
+}
+
+/* Navigation bar */
+.nav-bar {
     list-style-type: none;
     margin: auto;
     padding: 0;
-    border: solid lavender;
-    border-style: groove;
     overflow: hidden;
     text-align: center;
     width: fit-content;
     background-color: lightsteelblue;
-  }
+    border: solid lavender;
+    border-style: groove;
+}
 
-/* elements of nav bar from left to right */
-#lihbar {
+.nav-bar li {
     float: left;
 }
 
-/* display the contents of the nav bar */
-li a {
+.nav-bar li a {
     display: block;
- color: black;
- text-align: center;
- padding: 10px;
- text-decoration: none;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
 }
 
-/* hover with mouse values */
-li a:hover {
- background-color: lavender;
+.nav-bar li a:hover {
+    background-color: lavender;
+}
+
+/* Main content */
+main {
+    text-align: center;
+}
+
+/* Flashcard container */
+.flashcard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.flashcard {
+    position: relative;
+    width: 400px;
+    height: 250px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+.front,
+.back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    backface-visibility: hidden;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+align-items: center;
+text-align: center;
+transition: transform 0.6s;
+}
+
+.front {
+transform: rotateY(0deg);
+}
+
+.back {
+transform: rotateY(180deg);
+}
+
+.flashcard:hover .front {
+transform: rotateY(180deg);
+}
+
+.flashcard:hover .back {
+transform: rotateY(0deg);
+}
+
+.question {
+font-size: 24px;
+font-weight: bold;
+margin-bottom: 10px;
+}
+
+.answer {
+font-size: 18px;
+}
+
+/* Footer */
+footer {
+margin-top: 2rem;
+text-align: center;
 }
 
 hr {
-    border: 2px solid black;
-  }
+border: 2px solid black;
+}
