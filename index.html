@@ -1,34 +1,46 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Final Project</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Project</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="style.css" rel="stylesheet" type="text/css">
 </head>
-  <body>
-   
-    <!-- horizontal bar -->
-    <ul id="ulhbar">
-        <li id="lihbar"><a href="https://www.google.com/">First Class</a></li>
-        <li id="lihbar"><a href="https://www.google.com/">Second Class</a></li>
-        <li id="lihbar"><a href="https://www.google.com/">Third Class</a></li>
-        <li id="lihbar"><a href="https://www.google.com/">Fourth Class</a></li>
-        <li id="lihbar"><a href="https://www.google.com/">Fifth Class</a></li>
-        <li id="lihbar"><a href="https://www.google.com/">Sixth Class</a></li>
-    </ul>
+<body>
 
-    <h1>Put title here</h1>
+    <!-- Navigation bar -->
+    <nav>
+        <ul class="nav-bar">
+            <li><a href="https://www.google.com/">First Class</a></li>
+            <li><a href="https://www.google.com/">Second Class</a></li>
+            <li><a href="https://www.google.com/">Third Class</a></li>
+            <li><a href="https://www.google.com/">Fourth Class</a></li>
+            <li><a href="https://www.google.com/">Fifth Class</a></li>
+            <li><a href="https://www.google.com/">Sixth Class</a></li>
+        </ul>
+    </nav>
 
-    <div id="card">
-        
-    </div>
+    <!-- Main content -->
+    <main>
+        <h1>Put title here</h1>
 
-    <button id="back" type="button">Back</button>
-    <button id="next" type="button">Next</button>
+        <div class="flashcard-container">
+            <div class="flashcard" onclick="flipCard(this)">
+                <div class="front">
+                    <h2 class="question">Question goes here</h2>
+                </div>
+                <div class="back">
+                    <p class="answer">Answer goes here</p>
+                </div>
+            </div>
+        </div>
+    </main>
 
+    <!-- Footer -->
+    <footer>
+        <hr>
+    </footer>
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><hr>
-    
-
-  </body>
+</body>
 </html>
