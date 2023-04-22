@@ -15,6 +15,7 @@ body {
     background-color: lightsteelblue;
     border: solid lavender;
     border-style: groove;
+    border-radius: 10px;
 }
 
 .nav-bar li {
@@ -44,6 +45,8 @@ main {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .flashcard {
@@ -109,4 +112,64 @@ text-align: center;
 
 hr {
 border: 2px solid black;
+}
+
+/* Add card form */
+.add-card {
+    width: 400px;
+    height: 250px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 2rem auto;
+}
+
+.add-card h2 {
+    margin-bottom: 1rem;
+}
+
+.add-card form {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+}
+
+.add-card label {
+    font-size: 14px;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.add-card input[type="text"] {
+    width: 100%;
+    padding: 0.25rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.add-card input[type="submit"] {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: lightsteelblue;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.add-card input[type="submit"]:hover {
+    background-color: lavender;
 }
