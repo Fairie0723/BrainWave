@@ -5,34 +5,56 @@ body {
 }
 
 /* Navigation bar */
-.nav-bar {
-    list-style-type: none;
-    margin: auto;
-    padding: 0;
-    overflow: hidden;
-    text-align: center;
+nav {
     width: fit-content;
-    background-color: lightsteelblue;
-    border: solid lavender;
-    border-style: groove;
+    margin: 0 auto;
+    background-color: #1b1212;
+    padding: 0px;
     border-radius: 10px;
-}
-
-.nav-bar li {
-    float: left;
-}
-
-.nav-bar li a {
-    display: block;
-    color: black;
+  }
+  nav ul {
+    list-style: none;
     text-align: center;
-    padding: 10px;
+    padding: 0px;
+  }
+  nav ul li {
+    display: inline-block;
+  }
+  nav ul li a {
+    display: block;
+    padding: 15px;
     text-decoration: none;
-}
-
-.nav-bar li a:hover {
-    background-color: lavender;
-}
+    color: white;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 10px;
+  }
+  nav ul li a,
+  nav ul li a:after,
+  nav ul li a:before {
+    transition: all .5s;
+  }
+  nav ul li a:hover {
+    color: #aaa;
+  }
+  nav.stroke ul li a{
+    position: relative;
+  }
+  nav.stroke ul li a:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 5px;
+    width: 0%;
+    content: '.';
+    color: transparent;
+    background: white;
+    height: 1px;
+  }
+  nav.stroke ul li a:hover:after {
+    width: 100%;
+  }
 
 /* Main content */
 main {
