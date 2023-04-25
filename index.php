@@ -10,8 +10,8 @@
 <body>
 
     <!-- Navigation bar -->
-    <nav>
-        <ul class="nav-bar">
+    <nav class="stroke">
+        <ul>
             <li><a href="https://www.google.com/">First Class</a></li>
             <li><a href="https://www.google.com/">Second Class</a></li>
             <li><a href="https://www.google.com/">Third Class</a></li>
