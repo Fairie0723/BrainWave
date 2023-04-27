@@ -6,13 +6,16 @@
     <title>Final Project</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="style.css" rel="stylesheet" type="text/css">
+
+    
+    
 </head>
 <body>
 
     <!-- Navigation bar -->
     <nav>
         <ul class="nav-bar">
-            <li><a href="https://www.google.com/">First Class</a></li>
+            <li><a href="firstPage.php">First Class</a></li>
             <li><a href="https://www.google.com/">Second Class</a></li>
             <li><a href="https://www.google.com/">Third Class</a></li>
             <li><a href="https://www.google.com/">Fourth Class</a></li>
@@ -137,6 +140,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ?>
         </div>
 
+    <!-- Add card form toggle button -->
+    <button id="toggle-add-card-form">Add Card</button>
+
+
         <!-- Add card form -->
         <div class="add-card">
             <h2>Add a new card</h2>
@@ -163,12 +170,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <!-- Footer content -->
     </footer>
 
-    <!-- JavaScript for flashcard flip -->
-    <script>
-        function flipCard(card) {
-            card.classList.toggle('flipped');
-        }
-    </script>
+   <!-- JavaScript for flashcard flip and form toggle -->
+<script>
+    function flipCard(card) {
+        card.classList.toggle('flipped');
+    }
+
+    function toggleAddCardForm() {
+        const form = document.querySelector('.add-card');
+        form.style.display = form.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    // Hide the form initially when the page loads
+    function hideAddCardFormOnLoad() {
+        const form = document.querySelector('.add-card');
+        form.style.display = 'none';
+    }
+
+    // Call the function to hide the form on page load
+    document.addEventListener('DOMContentLoaded', hideAddCardFormOnLoad);
+
+    // Attach the event listener to the button
+    const toggleButton = document.getElementById('toggle-add-card-form');
+    toggleButton.addEventListener('click', toggleAddCardForm);
+</script>
 
 </body>
 </html>

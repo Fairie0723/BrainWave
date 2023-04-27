@@ -61,6 +61,17 @@ main {
     transition: transform 0.6s;
 }
 
+.title-description {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
 .front,
 .back {
     position: absolute;
@@ -114,8 +125,11 @@ hr {
 border: 2px solid black;
 }
 
+
+
 /* Add card form */
 .add-card {
+    
     width: 400px;
     height: 250px;
     background-color: #fff;
@@ -172,4 +186,30 @@ border: 2px solid black;
 
 .add-card input[type="submit"]:hover {
     background-color: lavender;
+}
+
+/* Add card button */
+#toggle-add-card-form {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    padding: 12px 24px;
+    margin: 16px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#toggle-add-card-form:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+#toggle-add-card-form:active {
+    background-color: #3d8b40;
+    transform: translateY(1px);
 }
