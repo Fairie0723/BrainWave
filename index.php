@@ -96,6 +96,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: index.php");
     exit;
 }
+
+// Function to delete a card by its ID
+function delete_card($card_id) {
+    // Connect to the database
+    $conn = db_connect();
+
+    // Prepare an SQL statement
+    $stmt = $conn->prepare("DELETE FROM cards WHERE id = ?");
+    $stmt->bind_param("i", $card_id);
+
+    // Execute the statement
+    $stmt->execute();
+
+    // Close the statement and connection
+    $stmt->close();
+    $conn->close();
+}
+
+// Check if it's a delete request
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["card_id"])) {
+    $card_id = $_POST["card_id"];
+    delete_card($card_id);
+    exit;
+}
+
+function getUniqueCardTitles() {
+    $conn = db_connect();
+    $result = $conn->query("SELECT DISTINCT card_title FROM cards");
+    $titles = $result->fetch_all(MYSQLI_ASSOC);
+    $conn->close();
+
+    return $titles;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -117,28 +151,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <main>
         <h1>Put title here</h1>
 
-        <div class="flashcard-container">
-            <?php
-            // Fetch the flashcard data from the SQL database
-            $flashcards = getFlashcardsFromDatabase();
+        <div class="search-container">
+    <label for="search">Search by Title:</label>
+    <select id="search" onchange="filterCards()">
+        <option value="">All</option>
+        <?php
+        $titles = getUniqueCardTitles();
+        foreach ($titles as $title) {
+            echo '<option value="' . htmlspecialchars($title['card_title']) . '">' . htmlspecialchars($title['card_title']) . '</option>';
+        }
+        ?>
+    </select>
+</div>
 
-            // Loop through the flashcards and generate the HTML
-            foreach ($flashcards as $flashcard) {
-                echo '<div class="flashcard" onclick="flipCard(this)">';
-                echo '<div class="front">';
-                echo '<div class="title-description">';
-                echo '<h3 class="card_title">' . htmlspecialchars($flashcard['card_title']) . '</h3>';
-                echo '<p class="card_description">' . htmlspecialchars($flashcard['card_description']) . '</p>';
-                echo '</div>';
-                echo '<h2                class="question">' . htmlspecialchars($flashcard['card_question']) . '</h2>';
-                echo '</div>';
-                echo '<div class="back">';
-                echo '<p class="answer">' . htmlspecialchars($flashcard['card_answer']) . '</p>';
-                echo '</div>';
-                echo '</div>';
-            }
-            ?>
-        </div>
+
+        <div class="flashcard-container">
+    <?php
+    // Fetch the flashcard data from the SQL database
+    $flashcards = getFlashcardsFromDatabase();
+
+    // Loop through the flashcards and generate the HTML
+    foreach ($flashcards as $flashcard) {
+        echo '<div class="flashcard" data-id="' . htmlspecialchars($flashcard['id']) . '" onclick="flipCard(this)">';
+        echo '<div class="front">';
+        echo '<div class="title-description">';
+        echo '<h3 class="card_title">' . htmlspecialchars($flashcard['card_title']) . '</h3>';
+        echo '<p class="card_description">' . htmlspecialchars($flashcard['card_description']) . '</p>';
+        echo '</div>';
+        echo '<h2 class="question">' . htmlspecialchars($flashcard['card_question']) . '</h2>';
+        echo '</div>';
+        echo '<div class="back">';
+        echo '<p class="answer">' . htmlspecialchars($flashcard['card_answer']) . '</p>';
+        echo '</div>';
+        echo '</div>';
+    }
+    ?>
+</div>
+
+
+         <!-- Button to toggle delete mode -->
+    <button id="delete-mode-btn" onclick="toggleDeleteMode()">Delete mode</button>
 
     <!-- Add card form toggle button -->
     <button id="toggle-add-card-form">Add Card</button>
@@ -172,9 +224,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
    <!-- JavaScript for flashcard flip and form toggle -->
 <script>
-    function flipCard(card) {
-        card.classList.toggle('flipped');
+        let deleteMode = false;
+
+        function toggleDeleteMode() {
+    deleteMode = !deleteMode;
+    const flashcards = document.getElementsByClassName('flashcard');
+    for (let i = 0; i < flashcards.length; i++) {
+        if (deleteMode) {
+            flashcards[i].classList.add('delete-mode');
+            flashcards[i].setAttribute('onclick', 'deleteCard(this)');
+        } else {
+            flashcards[i].classList.remove('delete-mode');
+            flashcards[i].setAttribute('onclick', 'flipCard(this)');
+        }
     }
+}
+
+
+        function flipCard(card) {
+            if (deleteMode) {
+                deleteCard(card);
+            } else {
+                card.classList.toggle('flipped');
+            }
+        }
+
+        function deleteCard(card) {
+    if (!deleteMode) return;
+
+    if (confirm("Are you sure you want to delete this card?")) {
+        const cardId = card.getAttribute("data-id");
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "delete_card.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                card.remove();
+            }
+        };
+        xhr.send("id=" + cardId);
+    }
+}
+
+    
 
     function toggleAddCardForm() {
         const form = document.querySelector('.add-card');
@@ -193,7 +285,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Attach the event listener to the button
     const toggleButton = document.getElementById('toggle-add-card-form');
     toggleButton.addEventListener('click', toggleAddCardForm);
+
+    function filterCards() {
+    const searchValue = document.getElementById("search").value.toLowerCase();
+    const cards = document.getElementsByClassName("flashcard");
+
+    for (let i = 0; i < cards.length; i++) {
+        const cardTitle = cards[i].querySelector(".card_title").textContent.toLowerCase();
+        if (searchValue === "" || cardTitle === searchValue) {
+            cards[i].style.display = "block";
+        } else {
+            cards[i].style.display = "none";
+        }
+    }
+}
+
+
 </script>
+
+
 
 </body>
 </html>
