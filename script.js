@@ -1,3 +1,4 @@
+
 // Create an array of question and answer objects
 let qaPairs = [];
   
@@ -38,6 +39,7 @@ let qaPairs = [];
   // Initialize the card with the first question and answer pair
   updateCard();
   
+
 
 function showForm() {
     document.getElementById('prompt').style.display = 'block';

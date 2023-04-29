@@ -12,8 +12,10 @@
     <!-- Navigation bar -->
     <nav class="stroke">
         <ul>
+
         <li><a href="index.php">Home</a></li>
             <li><a href="firstPage.php">Group Cards</a></li>
+
             <li><a href="https://www.google.com/">Third Class</a></li>
             <li><a href="https://www.google.com/">Fourth Class</a></li>
             <li><a href="https://www.google.com/">Fifth Class</a></li>
