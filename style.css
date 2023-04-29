@@ -61,20 +61,51 @@ main {
     text-align: center;
 }
 
+/* Container for flashcard and navigation */
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+}
+
+.card-navigation {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+}/* Container for flashcard and navigation */
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+}
+
+.card-navigation {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+}
+
 /* Flashcard container */
 .flashcard-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 50vh;
     flex-wrap: wrap;
-    gap: 20px;
-}
+    gap: 0px;
+    margin: 0 auto; /* Add this line */
+    max-width: 800px; /* Add this line */
+  }
+
 
 .flashcard {
     position: relative;
-    width: 400px;
-    height: 250px;
+    width: 600px;
+    height: 450px;
     background-color: #fff;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -194,4 +225,28 @@ border: 2px solid black;
 
 .add-card input[type="submit"]:hover {
     background-color: lavender;
+}
+
+.arrows {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 200px;
+}
+
+.arrow-left,
+.arrow-right {
+  font-size: 24px;
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.card_title {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 0px;
+  color: #651818;
+  text-align: center;
+  margin: 50px;
 }

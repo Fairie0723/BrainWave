@@ -12,8 +12,10 @@
     <!-- Navigation bar -->
     <nav class="stroke">
         <ul>
-            <li><a href="https://www.google.com/">First Class</a></li>
-            <li><a href="https://www.google.com/">Second Class</a></li>
+
+        <li><a href="index.php">Home</a></li>
+            <li><a href="firstPage.php">Group Cards</a></li>
+
             <li><a href="https://www.google.com/">Third Class</a></li>
             <li><a href="https://www.google.com/">Fourth Class</a></li>
             <li><a href="https://www.google.com/">Fifth Class</a></li>
@@ -23,77 +25,91 @@
 
 </body>
 </html>
-
 <?php
-// Function to establish a database connection
-function db_connect() {
-    // Database connection details
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "brainwave";
 
-    // Create a connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Check the connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+// Replace "hostname", "username", "password", and "database" with your database credentials
+$connection = mysqli_connect("127.0.0.1", "root", "", "brainwave");
 
-    return $conn;
+if (!$connection) {
+  die("Connection failed: " . mysqli_connect_error());
 }
 
-// Function to fetch flashcards from the database
-function getFlashcardsFromDatabase() {
-    // Connect to the database
-    $conn = db_connect();
+$query = "SELECT card_title, card_question, card_answer FROM CARDS";
+$result = mysqli_query($connection, $query);
 
-    // Query the database for all flashcards
-    $result = $conn->query("SELECT * FROM cards");
+// Create an array of question and answer objects from the database results
+$qaPairs = array();
 
-    // Fetch all flashcards as an associative array
-    $flashcards = $result->fetch_all(MYSQLI_ASSOC);
+while ($row = mysqli_fetch_assoc($result)) {
+  $qaPairs[] = array(
+    'card_title' => $row['card_title'],
+    'card_question' => $row['card_question'],
+    'card_answer' => $row['card_answer']
+  );
+}
 
-    // Close the connection
-    $conn->close();
+mysqli_close($connection);
 
-    return $flashcards;
+$currentPair = 0;
+$totalPairs = count($qaPairs);
+
+if (isset($_POST['prev'])) {
+  $currentPair = ($_POST['currentPair'] - 1 + $totalPairs) % $totalPairs;
+} elseif (isset($_POST['next'])) {
+  $currentPair = ($_POST['currentPair'] + 1) % $totalPairs;
 }
 
 // Function to insert a new card into the database
-function insert_card($card_title, $card_description, $card_question, $card_answer) {
-    // Connect to the database
-    $conn = db_connect();
+function insert_card($card_title, $card_question, $card_answer) {
+  // Connect to the database
+  $conn = mysqli_connect("localhost", "root", "", "brainwave");
 
-    // Prepare an SQL statement
-    $stmt = $conn->prepare("INSERT INTO cards (card_title, card_description, card_question, card_answer) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $card_title, $card_description, $card_question, $card_answer);
+  // Check the connection
+  if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+  }
 
-    // Execute the statement
-    $stmt->execute();
+  // Prepare the statement
+  $stmt = $conn->prepare("INSERT INTO cards (card_title, card_question, card_answer) VALUES (?, ?, ?)");
 
-    // Close the statement and connection
-    $stmt->close();
-    $conn->close();
+  // Check if the statement was prepared
+  if (!$stmt) {
+    die("Error preparing statement: " . mysqli_error($conn));
+  }
+
+  // Bind the parameters
+  $stmt->bind_param("sss", $card_title, $card_question, $card_answer);
+
+  // Execute the statement
+  $stmt->execute();
+
+  // Close the statement
+  $stmt->close();
+
+  // Close the connection
+  mysqli_close($conn);
 }
 
-// Check if the form was submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get the submitted data
-    $card_title = $_POST["card_title"];
-    $card_description = $_POST["card_description"];
-    $card_question = $_POST["card_question"];
-    $card_answer = $_POST["card_answer"];
+// Check if the form was submitted and the "Add Card" button was clicked
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_card"])) {
+  // Get the submitted data
+  $card_title = $_POST["card_title"];
+  $card_question = $_POST["card_question"];
+  $card_answer = $_POST["card_answer"];
 
-    // Insert the new card into the database
-    insert_card($card_title, $card_description, $card_question, $card_answer);
+  // Insert the new card into the database
+  insert_card($card_title, $card_question, $card_answer);
 
-    // Redirect to the main page
-    header("Location: index.php");
-    exit;
+  // Redirect to the main page
+  header("Location: index.php");
+  exit;
 }
+
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -112,40 +128,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <!-- Main content -->
     <main>
-        <h1>Put title here</h1>
+    <h1 class="card_title"><?php echo $qaPairs[$currentPair]['card_title']; ?></h1>
 
-        <div class="flashcard-container">
-            <?php
-            // Fetch the flashcard data from the SQL database
-            $flashcards = getFlashcardsFromDatabase();
-
-            // Loop through the flashcards and generate the HTML
-            foreach ($flashcards as $flashcard) {
-                echo '<div class="flashcard" onclick="flipCard(this)">';
-                echo '<div class="front">';
-                echo '<div class="title-description">';
-                echo '<h3 class="card_title">' . htmlspecialchars($flashcard['card_title']) . '</h3>';
-                echo '<p class="card_description">' . htmlspecialchars($flashcard['card_description']) . '</p>';
-                echo '</div>';
-                echo '<h2                class="question">' . htmlspecialchars($flashcard['card_question']) . '</h2>';
-                echo '</div>';
-                echo '<div class="back">';
-                echo '<p class="answer">' . htmlspecialchars($flashcard['card_answer']) . '</p>';
-                echo '</div>';
-                echo '</div>';
-            }
-            ?>
+    </main>
+    <div class="flashcard-container">
+    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+      <input type="hidden" name="currentPair" value="<?php echo $currentPair; ?>">
+      <button type="submit" name="prev" class="arrow-left"><==</button>
+    </form>
+    <div class="flashcard" onclick="flipCard(this)">
+            <div class="front">
+            <h1 class="card-question"><?php echo $qaPairs[$currentPair]['card_question']; ?></h1>
+            </div>
+            <div class="back">
+            <h2 class="card-answer"><?php echo $qaPairs[$currentPair]['card_answer']; ?></h2>   
+            </div>
         </div>
+        
+  <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+      <input type="hidden" name="currentPair" value="<?php echo $currentPair; ?>">
+      <button type="submit" name="next" class="arrow-right">==></button>
+    </form>
 
-        <!-- Add card form -->
-        <div class="add-card">
+  </div>
+
+
+ <!-- Add card form -->
+ <div class="add-card">
             <h2>Add a new card</h2>
             <form action="index.php" method="post">
                 <label for="card_title">Title:</label>
                 <input type="text" id="card_title" name="card_title" required>
-                
-                <label for="card_description">Description:</label>
-                <input type="text" id="card_description" name="card_description" required>
                 
                 <label for="card_question">Question:</label>
                 <input type="text" id="card_question" name="card_question" required>
@@ -153,23 +166,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="card_answer">Answer:</label>
                 <input type="text" id="card_answer" name="card_answer" required>
                
-                <input type="submit" value="Add Card">
+                <input type="submit" name="add_card" value="Add Card">
             </form>
         </div>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <!-- Footer content -->
-    </footer>
-
-    <!-- JavaScript for flashcard flip -->
-    <script>
-        function flipCard(card) {
-            card.classList.toggle('flipped');
-        }
-    </script>
-
 </body>
 </html>
-

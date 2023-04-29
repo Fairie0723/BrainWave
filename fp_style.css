@@ -1,0 +1,295 @@
+/* General styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: lightblue;
+}
+
+/* Navigation bar */
+.nav-bar {
+    list-style-type: none;
+    margin: auto;
+    padding: 0;
+    overflow: hidden;
+    text-align: center;
+    width: fit-content;
+    background-color: lightsteelblue;
+    border: solid lavender;
+    border-style: groove;
+    border-radius: 10px;
+}
+
+.nav-bar li {
+    float: left;
+}
+
+.nav-bar li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.nav-bar li a:hover {
+    background-color: lavender;
+}
+
+main {
+    width: 100vw; /* Set the width to the full viewport width */
+    min-height: 100vh; /* Set the minimum height to the full viewport height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+.flashcard-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in the width calculation */
+    height: calc(100vh - 60px); /* Adjust the height to fill the remaining space */
+    overflow-y: auto; /* Make the container scrollable */
+    margin-bottom: 20px;
+}
+
+/* Optional: apply a custom scrollbar for a better look */
+.flashcard-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.flashcard-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 5px;
+}
+
+.flashcard {
+    position: relative;
+    width: 400px;
+    height: 250px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+.title-description {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.front,
+.back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    backface-visibility: hidden;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+align-items: center;
+text-align: center;
+transition: transform 0.6s;
+}
+
+.front {
+transform: rotateY(0deg);
+}
+
+.back {
+transform: rotateY(180deg);
+}
+
+.flashcard:hover .front {
+transform: rotateY(180deg);
+}
+
+.flashcard:hover .back {
+transform: rotateY(0deg);
+}
+
+.question {
+font-size: 24px;
+font-weight: bold;
+margin-bottom: 10px;
+}
+
+.answer {
+font-size: 18px;
+}
+
+/* Footer */
+footer {
+margin-top: 2rem;
+text-align: center;
+}
+
+hr {
+border: 2px solid black;
+}
+
+
+
+/* Add card form */
+.add-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.add-card h2 {
+    margin-bottom: 1rem;
+}
+
+.add-card form {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+}
+
+.add-card label {
+    font-size: 14px;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.add-card input[type="text"] {
+    width: 100%;
+    padding: 0.25rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.add-card input[type="submit"] {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: lightsteelblue;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.add-card input[type="submit"]:hover {
+    background-color: lavender;
+}
+
+/* Add card button */
+#toggle-add-card-form {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    padding: 12px 24px;
+    margin: 16px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#toggle-add-card-form:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+#toggle-add-card-form:active {
+    background-color: #3d8b40;
+    transform: translateY(1px);
+}
+
+#delete-mode-btn {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    padding: 12px 24px;
+    margin: 16px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#delete-mode-btn:active {
+    background-color: #3d8b40;
+    transform: translateY(1px);
+}
+
+.flashcard.delete-mode:hover {
+    background-color: rgba(255, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-container label {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.search-container select {
+    font-size: 18px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    appearance: none;
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+.search-container select:hover {
+    background-color: #ddd;
+}
+
+.search-container select:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
