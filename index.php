@@ -6,22 +6,36 @@
     <title>Final Project</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 
     <!-- Navigation bar -->
-    <nav class="stroke">
-        <ul>
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    <a class="navbar-brand" href="#">BrainWave</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li class="dropdown">
+          <a class="navbar-toggle" data-toggle="collapse" href="#">Class 3 <span class="caret"></span></a>
+          <a class="navbar-toggle" data-toggle="collapse" href="#">Class 2 <span class="caret"></span></a>
+          <a class="navbar-toggle" data-toggle="collapse" href="#">Class 1 <span class="caret"></span></a>  
+        </li>
 
-        <li><a href="index.php">Home</a></li>
-            <li><a href="firstPage.php">Group Cards</a></li>
-
-            <li><a href="https://www.google.com/">Third Class</a></li>
-            <li><a href="https://www.google.com/">Fourth Class</a></li>
-            <li><a href="https://www.google.com/">Fifth Class</a></li>
-            <li><a href="https://www.google.com/">Sixth Class</a></li>
-        </ul>
-    </nav>
+      </ul>
+    </div>
+  </div>
+</nav>
 
 </body>
 </html>
