@@ -231,15 +231,15 @@ border: 2px solid black;
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
-  width: 200px;
+  width: 20px;
 }
 
 .arrow-left,
 .arrow-right {
-  font-size: 24px;
+  font-size: 5px;
   font-weight: bold;
   border: none;
-  background-color: transparent;
+  background-color: lightblue;
   cursor: pointer;
 }
 .card_title {

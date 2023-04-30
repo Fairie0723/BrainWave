@@ -134,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_card"])) {
     <div class="flashcard-container">
     <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
       <input type="hidden" name="currentPair" value="<?php echo $currentPair; ?>">
-      <button type="submit" name="prev" class="arrow-left"><==</button>
+      <button type="submit" name="prev" class="arrow-left"><img src="back_arrow.png" height="80px" width="80px"></button>
     </form>
     <div class="flashcard" onclick="flipCard(this)">
             <div class="front">
@@ -147,7 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_card"])) {
         
   <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
       <input type="hidden" name="currentPair" value="<?php echo $currentPair; ?>">
-      <button type="submit" name="next" class="arrow-right">==></button>
+      <button type="submit" name="next" class="arrow-right"><img src="arrow_right.png" height="80px" width="80px"></button>
     </form>
 
   </div>
