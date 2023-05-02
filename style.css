@@ -1,3 +1,19 @@
+.flashcard {
+  position: relative;
+  width: 90%;
+  height: auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+
+@media (min-width: 820px) {
+
 /* General styling */
 body {
     font-family: Arial, sans-serif;
@@ -74,13 +90,6 @@ main {
   display: flex;
   justify-content: space-between;
   width: 200px;
-}/* Container for flashcard and navigation */
-.card-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 80vh;
 }
 
 .card-navigation {
@@ -88,30 +97,35 @@ main {
   justify-content: space-between;
   width: 200px;
 }
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
 
 /* Flashcard container */
 .flashcard-container {
+  position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 50vh;
     flex-wrap: wrap;
     gap: 0px;
-    margin: 0 auto; /* Add this line */
-    max-width: 800px; /* Add this line */
+    margin: 0 auto; 
+    max-width: 800px; 
+    
   }
 
 
 .flashcard {
-    position: relative;
+    
     width: 600px;
     height: 450px;
-    background-color: #fff;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    transform-style: preserve-3d;
-    transition: transform 0.6s;
+    
+    
 }
 
 .front,
@@ -236,13 +250,30 @@ border: 2px solid black;
 
 .arrow-left,
 .arrow-right {
-  font-size: 5px;
-  font-weight: bold;
   border: none;
-  background-color: lightblue;
+  background-color: transparent;
   cursor: pointer;
-  size: relative;
+  padding: 0;
+  margin: 0 1rem;
+  display: flex;
+  align-items: center;
+  z-index: 10;
 }
+
+.arrow-left {
+  position: absolute;
+  left: -100px;
+  top: calc(50% - 20px);
+}
+
+.arrow-right {
+  position: absolute;
+  right: -100px;
+  top: calc(50% - 20px);
+}
+
+
+
 .card_title {
   font-size: 40px;
   font-weight: bold;
@@ -251,6 +282,86 @@ border: 2px solid black;
   text-align: center;
   margin: 50px;
 }
+
+.delete-btn {
+  background-color: #ff4d4d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  margin: 1rem auto;
+  display: block;
+}
+
+.delete-btn:hover {
+  background-color: #ff1a1a;
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+@media (max-height: 700px) {
+  .flashcard {
+    width: 500px;
+    height: 400px;
+  }
+
+  .arrow-left,
+  .arrow-right {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0;
+    margin: 0 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .add-card {
+    margin-top: 50px; 
+  }
+ } 
+
+
+  @media (max-height: 500px) {
+    .flashcard {
+      width: 400px;
+      height: 300px;
+    }
+  
+
+  .arrow-left,
+.arrow-right {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  margin: 0 1rem;
+  display: flex;
+  align-items: center;
+}
+
+  .add-card {
+    margin-top: 150px; 
+  }
+}
+
+
+
+
+
+
+
 
 .navbar.navbar-1 .navbar-toggler-icon {
   background-image: url('https://mdbootstrap.com/img/svg/hamburger6.svg?color=000');
@@ -279,3 +390,181 @@ border: 2px solid black;
 .navbar.navbar-9 .navbar-toggler-icon {
   background-image: url('https://mdbootstrap.com/img/svg/hamburger3.svg?color=00FBD8');
 }
+
+@media (max-width: 820px) {
+
+
+  .arrow-left,
+.arrow-right {
+  background-color: lightblue;
+  border: none;
+    font-size: 1.5rem;
+  }
+
+  .arrow-left {
+    left: -30px;
+  }
+
+  .arrow-right {
+    right: -30px;
+  }
+
+
+  
+  body {
+    background-color: lightblue;
+    font-family: Arial, sans-serif;
+  }
+
+  .flashcard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 1rem;
+  }
+
+  .flashcard {
+    width: 90%;
+    height: auto;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .add-card-container {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .add-card-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .add-card-form label,
+  .add-card-form input {
+    width: 100%;
+  }
+
+  .add-card-form label {
+    margin-bottom: 0.5rem;
+  }
+
+  .add-card-form input {
+    margin-bottom: 1rem;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  .button {
+    width: 45%;
+  }
+
+
+  .add-card-container {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .add-card {
+    width: 90%;
+    height: auto;
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-weight: bold;
+    margin: 2rem auto;
+    
+  }
+
+  .add-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .add-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  .add-card label {
+    font-size: 1rem;
+    text-align: left;
+    width: 100%;
+  }
+
+  .add-card input[type="text"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .add-card input[type="submit"] {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: lightsteelblue;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .add-card input[type="submit"]:hover {
+    background-color: lavender;
+  }
+
+  
+
+
+  .delete-btn {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    margin: 1rem auto;
+    display: block;
+  }
+  
+  .delete-btn:hover {
+    background-color: #ff1a1a;
+  }
+
+  
+}
+
+
+
+

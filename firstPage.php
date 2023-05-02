@@ -137,7 +137,7 @@ function getUniqueCardTitles() {
 
     <!-- Main content -->
     <main>
-        <h1>Put title here</h1>
+        <h1>BrainWave</h1>
 
         <div class="search-container">
     <label for="search">Search by Title:</label>

@@ -50,3 +50,4 @@ function hideForm() {
     document.getElementById('prompt').style.display = 'none';
     document.getElementById('add').style.display = 'block';
 }
+
