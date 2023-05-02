@@ -4,7 +4,7 @@ function db_connect() {
     // Database connection details
     $servername = "localhost";
     $username = "root";
-    $password = "";
+    $password = "Siddhu*876";
     $dbname = "brainwave";
 
     // Create a connection
@@ -109,21 +109,22 @@ function getUniqueCardTitles() {
     <title>Final Project</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="fp_style.css" rel="stylesheet" type="text/css">
+    
 
-    
-    
+
 </head>
 <body>
 
     <!-- Navigation bar -->
-    <nav>
-        <ul class="nav-bar">
+    <nav class ="stroke">
+        <ul>
             <li><a href="index.php">Home</a></li>
-            <li><a href="firstPage.php">Group Cards</a></li>
-            <li><a href="https://www.google.com/">Third Class</a></li>
-            <li><a href="https://www.google.com/">Fourth Class</a></li>
-            <li><a href="https://www.google.com/">Fifth Class</a></li>
-            <li><a href="https://www.google.com/">Sixth Class</a></li>
+            <?php
+        $titles = getUniqueCardTitles();
+        foreach ($titles as $title) {
+            echo '<li>' . '<a href="#" onclick="changeValue(event)" value="' . htmlspecialchars($title['card_title']) . '">' . htmlspecialchars($title['card_title']) . '</a>' . '</li>';
+        }
+        ?>
         </ul>
     </nav>
 
@@ -178,7 +179,7 @@ function getUniqueCardTitles() {
 
 <div class="buttons-container">
     <button id="delete-mode-btn" onclick="toggleDeleteMode()">Delete mode</button>
-    <button id="toggle-add-card-form">Add Card</button>
+    <button id="toggle-add-card-form" style="margin-left:20px">Add Card</button>
 </div>
          <!-- Button to toggle delete mode -->
     
@@ -286,7 +287,19 @@ function getUniqueCardTitles() {
     }
 }
 
-
+// const changeSelected = (e) => {
+//   const $select = document.querySelector('#search');
+//   $select.value = '12233';
+//   filterCards()
+// };
+function changeValue(event) {
+    const $select = document.querySelector('#search');
+  $select.value = event.currentTarget.textContent;
+  console.log('Hii')
+  console.log(event.currentTarget.textContent)
+  filterCards() 
+    }
+document.getElementById("button").addEventListener('click', changeSelected);
 </script>
 
 

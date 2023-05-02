@@ -9,14 +9,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="script.js"></script>
 </head>
 <body>
 
     <!-- Navigation bar -->
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse" style="margin-top: 10px">
   <div class="container-fluid">
     <div class="navbar-header">
-    <a class="navbar-brand" href="#">BrainWave</a>
+
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -25,12 +26,8 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home <span class="caret"></span></a></li>
-        <li class="dropdown">
-        <li><a href="firstPage.php">First Page</a></li>
-          <a class="navbar-toggle" data-toggle="collapse" href="#">Class 3 <span class="caret"></span></a>
-          <a class="navbar-toggle" data-toggle="collapse" href="#">Class 2 <span class="caret"></span></a>
-          <a class="navbar-toggle" data-toggle="collapse" href="#">Class 1 <span class="caret"></span></a>  
+        <li class="active"><a href="#">Home </a></li>
+        <li><a href="firstPage.php">Topics</a></li>
         </li>
 
       </ul>
@@ -43,7 +40,7 @@
 <?php
 
 
-$connection = mysqli_connect("127.0.0.1", "root", "", "brainwave");
+$connection = mysqli_connect("127.0.0.1", "root", "Siddhu*876", "brainwave");
 
 if (!$connection) {
   die("Connection failed: " . mysqli_connect_error());
@@ -76,7 +73,7 @@ if (isset($_POST['prev'])) {
 
 
 function delete_card($card_title) {
-  $conn = mysqli_connect("localhost", "root", "", "brainwave");
+  $conn = mysqli_connect("localhost", "root", "Siddhu*876", "brainwave");
 
   if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
@@ -106,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete"])) {
 // Function to insert a new card into the database
 function insert_card($card_title, $card_question, $card_answer) {
   // Connect to the database
-  $conn = mysqli_connect("localhost", "root", "", "brainwave");
+  $conn = mysqli_connect("localhost", "root", "Siddhu*876", "brainwave");
 
   // Check the connection
   if (!$conn) {
@@ -150,7 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_card"])) {
 }
 
 function getUniqueCardTitles() {
-  $conn = mysqli_connect("localhost", "root", "", "brainwave");
+  $conn = mysqli_connect("localhost", "root", "Siddhu*876", "brainwave");
 
   if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
@@ -173,7 +170,7 @@ function getUniqueCardTitles() {
 
 
 function filter_cards($selected_title) {
-  $conn = mysqli_connect("localhost", "root", "", "brainwave");
+  $conn = mysqli_connect("localhost", "root", "Siddhu*876", "brainwave");
 
   if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
@@ -244,8 +241,10 @@ if (isset($qaPairs[$currentPair])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Final Project</title>
     <link href="style.css" rel="stylesheet" type="text/css">
+    <script src="script.js"></script>
 </head>
-<body>
+
+<body style="background: url(https://static.vecteezy.com/system/resources/thumbnails/018/033/254/small/abstract-colorful-background-soft-color-background-design-beautiful-blue-watercolor-grunge-watercolor-paper-textured-aquarelle-canvas-for-modern-creative-design-background-with-rays-vector.jpg); background-repeat: no-repeat; background-size: cover">
 
 
 
@@ -256,17 +255,24 @@ if (isset($qaPairs[$currentPair])) {
     </nav>
 
     <!-- Main content -->
+    <div class="container">
+  <h2 class="title">
+    <span class="title-word title-word-1">Welcome </span>
+    <span class="title-word title-word-2">To</span>
+    <span class="title-word title-word-3">Our</span>
+    <span class="title-word title-word-4">BrainWave</span>
+  </h2>
+</div>
     <main>
     <?php if (!empty($qaPairs)) : ?>
-    <h1 class="card_title"><?php echo $currentCard['card_title']; ?></h1>
+    <h1 class="card_title">Course Title: <?php echo $currentCard['card_title']; ?></h1>
     <?php endif; ?>
 
     </main>
-
-    <div class="search-container">
+  <div class ="search-container">
   <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
     <label for="card_title">Search by Title:</label>
-    <select id="card_title" name="card_title">
+    <select class="drop-select" name="select-profession">
       <option value="">All</option>
       <?php
       $titles = getUniqueCardTitles();
@@ -275,9 +281,9 @@ if (isset($qaPairs[$currentPair])) {
       }
       ?>
     </select>
-    <input type="submit" name="filter" value="Filter">
+    <input id ="filter-button" type="submit" name="filter" value="Filter">
   </form>
-</div>
+    </div>
 
 <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
       <input type="hidden" name="card_title" value="<?php echo $currentCard['card_title']; ?>">
@@ -314,7 +320,7 @@ if (isset($qaPairs[$currentPair])) {
 
 
  <!-- Add card form -->
- <div class="add-card">
+ <div class="add-card" style="margin-top: 100px">
             <h2>Add a new card</h2>
             <form action="index.php" method="post">
                 <label for="card_title">Title:</label>

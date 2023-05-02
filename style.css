@@ -1,3 +1,5 @@
+
+
 .flashcard {
   position: relative;
   width: 90%;
@@ -17,7 +19,8 @@
 /* General styling */
 body {
     font-family: Arial, sans-serif;
-    background-color: lightblue;
+    
+    
 }
 
 /* Navigation bar */
@@ -328,7 +331,7 @@ border: 2px solid black;
   }
 
   .add-card {
-    margin-top: 50px; 
+    margin-top: 100px; 
   }
  } 
 
@@ -563,6 +566,76 @@ border: 2px solid black;
   }
 
   
+}
+
+.title-word {
+  animation: color-animation 4s linear infinite;
+}
+
+.title-word-1 {
+  --color-1: #DF8453;
+  --color-2: #3D8DAE;
+  --color-3: #E4A9A8;
+}
+
+.title-word-2 {
+  --color-1: #141010;;
+  --color-2: #DBAD4A;
+  --color-3: #17494D;
+}
+
+.title-word-3 {
+  --color-1: #E4A9A8;
+  --color-2: #17494D;
+  --color-3: #141010;
+}
+
+.title-word-4 {
+  --color-1: #3D8DAE;
+  --color-2: #DF8453;
+  --color-3: #E4A9A8;
+}
+
+@keyframes color-animation {
+  0%    {color: var(--color-1)}
+  32%   {color: var(--color-1)}
+  33%   {color: var(--color-2)}
+  65%   {color: var(--color-2)}
+  66%   {color: var(--color-3)}
+  99%   {color: var(--color-3)}
+  100%  {color: var(--color-1)}
+}
+
+/* Here are just some visual styles. 🖌 */
+
+.container {
+  display: grid;
+  place-items: center;  
+  text-align: center;
+}
+
+.title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.search-container{
+  display: flex;
+  justify-content: center;
+}
+.drop-select{
+  width: 200px;
+  height: 30px;
+  border-radius: 5px;
+}
+#filter-button{
+  background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
 }
 
 
